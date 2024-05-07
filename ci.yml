@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master 
+  pull_request:
+    branches:
+      - master 
+
+jobs:
+  build:
+    runs-on: windows-latest  # Puedes ajustar el sistema operativo según tus necesidades
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'  # Ajusta la versión de .NET Core según tus requisitos
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release
