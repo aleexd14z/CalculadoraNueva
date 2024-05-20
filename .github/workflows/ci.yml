@@ -38,9 +38,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Este token está disponible automáticamente
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    # Necesitas configurarlo en los secretos del repo
       run: |
-          sonar-scanner -Dsonar.projectKey="aleexd14z_CalculadoraNueva" -Dsonar.organization="aleexd14z" -Dsonar.host.url="https://sonarcloud.io" -Dsonar.login="${{ secrets.SONAR_TOKEN }}"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"aleexd14z_CalculadoraNueva" /o:"aleexd14z" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
-          sonar-scanner -Dsonar.login="${{ secrets.SONAR_TOKEN }}"
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
     - name: Upload coverage report to GitHub
       uses: actions/upload-artifact@v2
