@@ -33,7 +33,7 @@ namespace TestTDD
 
             Calculadora.Calculadora calculadora = new Calculadora.Calculadora();
 
-            int resultado = calculadora.Sumar(numeros);
+            int resultadoo = calculadora.Sumar(numeros);
 
             Assert.Equal(3, resultado);
         }
