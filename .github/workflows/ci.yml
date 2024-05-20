@@ -37,7 +37,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Este token está disponible automáticamente
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    # Necesitas configurarlo en los secretos del repo
-      shell: powershell
       run: |
           sonar-scanner -Dsonar.projectKey="aleexd14z_CalculadoraNueva" -Dsonar.organization="aleexd14z" -Dsonar.host.url="https://sonarcloud.io" -Dsonar.login="${{ secrets.SONAR_TOKEN }}"
           dotnet build
