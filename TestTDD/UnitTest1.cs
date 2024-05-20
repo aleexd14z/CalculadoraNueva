@@ -28,14 +28,21 @@ namespace TestTDD
 
         [Fact]
         public void DosNumeros()
+
         {
-            string numeros = "1, 2";
+            string numeros = "1, " +
+                "" +
+                "" +
+                "" +
+                "2";
 
             Calculadora.Calculadora calculadora = new Calculadora.Calculadora();
 
             int resultado = calculadora.Sumar(numeros);
 
-            Assert.Equal(3, resultado);
+            Assert.Equal(3, 
+                
+                resultado);
         }
 
         [Fact]
