@@ -30,18 +30,18 @@ jobs:
       run: dotnet test --configuration Release --collect:"XPlat Code Coverage"
       working-directory: ./TestTDD
 
-    - name: sonar-scanner
+    - name: Setup SonarScanner
       uses: Warchant/setup-sonar-scanner@v8
-
+      
     - name: Build and analyze
       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Este token está disponible automáticamente
+         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    # Necesitas configurarlo en los secretos del repo
       shell: powershell
       run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"aleexd14z_CalculadoraNueva" /o:"aleexd14z" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          sonar-scanner begin /k:"aleexd14z_CalculadoraNueva" /o:"aleexd14z" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          sonar-scanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
     - name: Upload coverage report to GitHub
       uses: actions/upload-artifact@v2
