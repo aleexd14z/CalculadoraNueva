@@ -29,6 +29,10 @@ jobs:
     - name: Run unit tests and generate coverage report
       run: dotnet test --configuration Release --collect:"XPlat Code Coverage"
       working-directory: ./TestTDD
+
+    - name: sonar-scanner
+      uses: Warchant/setup-sonar-scanner@v8
+            
       
     - name: Cache SonarCloud scanner
       id: cache-sonar-scanner
