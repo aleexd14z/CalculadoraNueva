@@ -43,18 +43,18 @@ jobs:
       run: |
         dotnet tool install --global dotnet-sonarscanner
 
-      - name: Build and analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
-        run: |
+    - name: Build and analyze
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      shell: powershell
+      run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"aleexd14z_CalculadoraNueva" /o:"aleexd14z" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build --configuration Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
-      - name: Upload coverage report to GitHub
-        uses: actions/upload-artifact@v2
-        with:
-          name: code-coverage-report
-          path: ./TestTDD/TestResults/**/*.xml
+    - name: Upload coverage report to GitHub
+      uses: actions/upload-artifact@v2
+      with:
+       name: code-coverage-report
+       path: ./TestTDD/TestResults/**/*.xml
