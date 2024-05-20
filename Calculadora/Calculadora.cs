@@ -18,7 +18,6 @@ namespace Calculadora
             foreach (string numero in numerosSeparados)
             {
                 suma += int.Parse(numero);
-                suma += int.Parse(numero);
             }
             return suma;
         }

@@ -36,8 +36,6 @@ namespace TestTDD
             int resultado = calculadora.Sumar(numeros);
 
             Assert.Equal(3, resultado);
-
-            Assert.Equal(3, resultado);
         }
 
         [Fact]
