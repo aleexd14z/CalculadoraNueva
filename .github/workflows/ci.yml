@@ -27,7 +27,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Run unit tests and generate coverage report
-      run: dotnet test --configuration Release --collect:"XPlat Code Coverage"
+      run: dotnet test --configuration Release --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults/
       working-directory: ./TestTDD
 
     - name: Set up JDK 17
@@ -75,4 +75,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
        name: code-coverage-report
-       path: ./TestTDD/coverage.cobertura.xml
+       path: ./TestTDD/TestResults/coverage.cobertura.xml
