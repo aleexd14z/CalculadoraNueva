@@ -43,14 +43,14 @@ jobs:
       run: |
         dotnet tool install --global dotnet-sonarscanner
 
-    - name: Report coverage to SonarCloud
+    - name: Build and analyze
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Necesario para obtener información de PR, si existe
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      shell: powershell
       run: |
-        dotnet sonarscanner begin /k:"aleexd14z_CalculadoraNueva" /o:"aleexd14z" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-        dotnet build --configuration Release
-        dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        .\.sonar\scanner\dotnet-sonarscanner begin /k:"aleexd14z_CalculadoraNueva" /o:"aleexd14z" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+        .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
     - name: Upload coverage report to GitHub
       uses: actions/upload-artifact@v2
